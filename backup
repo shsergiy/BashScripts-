@@ -1,0 +1,23 @@
+#!/bin/bash
+# Backup's for important data 
+# Created on 10/12/17 
+# Author = Sergiy Shlapak
+# Version 1.1
+# Start pragma
+
+if [ "$1" = "help" ]
+then
+trap "echo sudo backup [First Dir] [Secound Dir] " EXIT
+fi
+
+if [ $# == 2 ]
+then 
+trap "echo Goodbye..." EXIT
+Time=`date +%d-%b-%y`
+FILENAME=BashTest_$Time.tar.gz
+SRCDIR=$1
+DESDIR=$2
+tar -cpzf /home/sergiy/$DESDIR/$FILENAME /home/sergiy/$SRCDIR
+fi
+exit 
+# End pragma 
