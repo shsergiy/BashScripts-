@@ -1,0 +1,5 @@
+#!/bin/bash
+while IFS='' read -r line || [[ -n "$line" ]]; do 
+	youtube-dl $line 
+done < "YoutubeURL.txt" 
+find . -type f -name "*.mkv" -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -c:a libmp3lame -y "${FILE%.mkv}.mp3";' _ '{}' \;
