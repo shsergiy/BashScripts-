@@ -1,7 +1,20 @@
 #!/bin/bash
+# Convert Youtube video format into Mp3 
+# Created on 11.12.17
+# Author = Sergiy Shlapak
+# Version 1.2 
+# Pragma Start
+
+
 trap "echo Take your mp3 file's"
-while IFS='' read -r line || [[ -n "$line" ]]; do 
+
+while IFS='' read -r line || [[ -n "$line" ]]
+do 
 	youtube-dl $line 
 done < "YoutubeURL.txt" 
+
 find . -type f -iname "*.webm" -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE%.webm}.mp3";' _ '{}' \;
+
 find . -type f -name "*.mkv" -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -c:a libmp3lame -y "${FILE%.mkv}.mp3";' _ '{}' \;
+
+# Pragma End
